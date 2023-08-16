@@ -10,3 +10,4 @@ export * from "./parseJwt";
 export * from "./sleep";
 export * from "./uniqueId";
 export * from "./stopPropagation";
+export * from "./scroll-to-view";

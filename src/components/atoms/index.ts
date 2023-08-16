@@ -1,1 +1,2 @@
-export const atoms = "1";
+export * from "./avatar";
+export * from "./image";

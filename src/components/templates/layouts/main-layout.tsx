@@ -4,7 +4,7 @@ import { ReactQueryProvider } from "../providers";
 const MainLayout = ({ children }: PropsWithChildren) => {
 	return (
 		<ReactQueryProvider>
-			<main>{children}</main>
+			<>{children}</>
 		</ReactQueryProvider>
 	);
 };

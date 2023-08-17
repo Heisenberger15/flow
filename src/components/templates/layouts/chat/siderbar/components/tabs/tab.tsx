@@ -10,7 +10,7 @@ const Tab = ({ children }: PropsWithChildren) => {
 	const ripple = useRipple(ref);
 
 	return (
-		<li className="relative w-full h-[70px]">
+		<li className="relative w-full h-[70px] group">
 			<Tooltip
 				label="Tooltip"
 				color="#111"
@@ -22,7 +22,7 @@ const Tab = ({ children }: PropsWithChildren) => {
 				<Link
 					ref={ref}
 					href={""}
-					className="w-full h-full flex justify-center items-center relative overflow-hidden rounded-md"
+					className="w-full h-full flex justify-center items-center relative overflow-hidden rounded-md group-hover:bg-[rgba(255,255,255,0.06)] transition-all"
 				>
 					{ripple}
 					{children}

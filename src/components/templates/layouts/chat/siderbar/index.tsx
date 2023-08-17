@@ -1,8 +1,9 @@
 "use client";
 
 import { useCallback } from "react";
-import { Folders, Tabs, Searchbar } from "./components";
+import { Tabs } from "./components";
 import { PanInfo, motion, useMotionValue } from "framer-motion";
+import ChatListSection from "./components/chat-list";
 
 const Sidebar = () => {
 	const Width = useMotionValue(350);
@@ -23,14 +24,11 @@ const Sidebar = () => {
 				style={{ width: Width }}
 				className=" grid grid-cols-[auto_3px]"
 			>
-				<div>
-					<Searchbar />
-					<Folders />
-				</div>
+				<ChatListSection />
 				<motion.div
 					drag="x"
 					dragConstraints={{ top: 0, left: 0, right: 0, bottom: 0 }}
-					className="h-full w-full bg-transparent cursor-w-resize"
+					className="h-full w-full bg-[#101010e3] cursor-w-resize"
 					dragElastic={0}
 					dragMomentum={false}
 					onDrag={handleDrag}

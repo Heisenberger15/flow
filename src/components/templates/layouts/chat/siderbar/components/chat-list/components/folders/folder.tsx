@@ -22,7 +22,7 @@ const Folder = () => {
 			<Link
 				ref={ref}
 				href={""}
-				className="flex items-center relative gap-4 max-w-[95%] mx-auto px-3 rounded  py-1 overflow-hidden w-full h-full group-hover:bg-[rgba(255,255,255,0.06)] transition-all"
+				className="flex items-center relative gap-4 max-w-[95%] mx-auto px-3 rounded-md py-1 overflow-hidden w-full h-full group-hover:bg-[rgba(255,255,255,0.06)] transition-all"
 			>
 				{ripple}
 				<Avatar

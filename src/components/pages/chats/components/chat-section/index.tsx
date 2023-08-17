@@ -39,12 +39,12 @@ const ChatSection = () => {
 	return (
 		<section className="flex flex-col-reverse overflow-y-scroll scrollbar">
 			<ul className="flex flex-col gap-4 w-full max-w-[95%] mx-auto">
-				<li id="top-divider" className="pt-[80px]" />
+				<li id="top-divider" className="pt-[52px]" />
 				{result?.map((chats, inx) => (
 					<li
 						key={inx}
 						className={cn(
-							"relative flex gap-4 items-end",
+							"relative flex gap-3 items-end",
 							chats?.[0]?.sender?.id === 2 ? "justify-end" : "",
 						)}
 					>
@@ -56,7 +56,7 @@ const ChatSection = () => {
 								alt={`${chats?.[0]?.sender?.name || "user"} profile image`}
 							/>
 						) : null}
-						<ul className="flex flex-col gap-4">
+						<ul className="flex flex-col gap-2">
 							{chats?.map(
 								(
 									{
@@ -71,8 +71,6 @@ const ChatSection = () => {
 									},
 									index: number,
 								) => {
-									console.log({ index, message });
-
 									return (
 										<li key={id} className="flex items-end">
 											<Message
@@ -80,6 +78,7 @@ const ChatSection = () => {
 												files={files}
 												sender={sender}
 												firstMessageBlock={index === 0}
+												lastMessageBlock={index === chats.length - 1}
 												repliedMessage={repliedMessage}
 												message={message}
 												isCurrentUser={sender?.id === 2}

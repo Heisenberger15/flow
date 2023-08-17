@@ -14,6 +14,7 @@ const Message = ({
 	status,
 	repliedMessage,
 	firstMessageBlock,
+	lastMessageBlock,
 }: MessageType) => {
 	const status_view = useMemo(() => viewStatus(status.view), [status.view]);
 
@@ -30,11 +31,21 @@ const Message = ({
 		<>
 			<div
 				className={cn(
-					`bg-[#40444B] px-5 py-2 rounded-[22.5px] select-text flex flex-col gap-2 w-fit min-w-[165px] max-w-full ipad:max-w-[680px] border border-solid transition-all`,
+					`bg-[#40444B] px-3 py-2 rounded-[0.9375rem] select-text flex flex-col gap-2 w-fit min-w-[165px] max-w-full ipad:max-w-[680px] border border-solid transition-all`,
 					isCurrentUser ? "!ml-auto !bg-[#2F3136]" : "",
 					status_view.title === "rejected" && isCurrentUser
 						? "border-rose-800"
 						: "border-transparent",
+
+					isCurrentUser
+						? "rounded-br-[0.375rem] rounded-tr-[0.375rem]"
+						: "rounded-bl-[0.375rem] rounded-tl-[0.375rem]",
+					isCurrentUser
+						? lastMessageBlock && "!rounded-br-none !rounded-tr-[0.9375rem]"
+						: lastMessageBlock && "!rounded-bl-none !rounded-tl-[0.9375rem]",
+					isCurrentUser
+						? firstMessageBlock && "!rounded-tr-[0.9375rem]"
+						: firstMessageBlock && "!rounded-tl-[0.9375rem]",
 				)}
 				id={`${id}`}
 			>

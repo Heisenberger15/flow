@@ -18,4 +18,5 @@ export interface ChatType {
 export interface MessageType extends ChatType {
 	isCurrentUser: boolean;
 	firstMessageBlock: boolean;
+	lastMessageBlock: boolean;
 }

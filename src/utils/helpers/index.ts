@@ -11,3 +11,4 @@ export * from "./sleep";
 export * from "./uniqueId";
 export * from "./stopPropagation";
 export * from "./scroll-to-view";
+export * from "./convert-string-label";

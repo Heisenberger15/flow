@@ -6,8 +6,7 @@ import { CustomImage } from "../image";
 export function Avatar({
 	isLoading = false,
 	quality = 65,
-	width = 50,
-	height = 50,
+	size = 50,
 	alt = "avatar image",
 	className,
 	...rest
@@ -17,8 +16,8 @@ export function Avatar({
 			{...{
 				isLoading,
 				quality,
-				width,
-				height,
+				width: size,
+				height: size,
 				alt,
 				className: cn("!rounded-full !aspect-square", className),
 				fallbackImage: AvatarPlaceholder,

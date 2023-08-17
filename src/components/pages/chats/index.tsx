@@ -13,9 +13,8 @@ const ChatPage = () => {
 
 	return (
 		<div className="w-full h-full relative">
-			{/* <div>{chatId}</div> */}
 			<Topbar />
-			<div className="grid grid-rows-[1fr_78px] h-full max-h-screen">
+			<div className="grid grid-rows-[1fr_auto] h-full max-h-screen">
 				<ChatSection />
 				<MessageInput />
 			</div>

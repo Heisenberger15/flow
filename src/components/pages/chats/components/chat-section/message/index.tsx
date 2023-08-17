@@ -1,18 +1,86 @@
-const Message = () => {
+import { ScrollToView, cn } from "@/utils";
+import Image from "next/image";
+import { memo, useMemo } from "react";
+import { viewStatus } from "../utils/view-status";
+import { MessageType } from "../types/message";
+
+const Message = ({
+	id,
+	isCurrentUser,
+	message,
+	sender,
+	created_at,
+	updated_at,
+	status,
+	repliedMessage,
+	firstMessageBlock,
+}: MessageType) => {
+	const status_view = useMemo(() => viewStatus(status.view), [status.view]);
+
+	const moveToRepliedMessage = () => {
+		if (!repliedMessage?.id) return;
+		ScrollToView(`${repliedMessage.id}`, {
+			block: "center",
+			inline: "nearest",
+			behavior: "smooth",
+		});
+	};
+
 	return (
-		<li className=" bg-gray-700 w-[414px] h-[390px] flex-col justify-end items-center inline-flex">
-			<div className="self-stretch h-8 pt-[3px] pb-2.5 justify-start items-center gap-2 inline-flex">
-				<div className="text-white text-sm font-normal leading-[19px]">
-					but it's not as pretty as the keyboard I'm making now 😎
-				</div>
-				<div className="pr-2.5 pt-1 pb-px justify-start items-center flex">
-					<div className="text-right text-gray-400 text-xs leading-[14px]">
-						10:03 AM
-					</div>
+		<>
+			<div
+				className={cn(
+					`bg-[#40444B] px-5 py-2 rounded-[22.5px] select-text flex flex-col gap-2 w-fit min-w-[165px] max-w-full ipad:max-w-[680px] border border-solid transition-all`,
+					isCurrentUser ? "!ml-auto !bg-[#2F3136]" : "",
+					status_view.title === "rejected" && isCurrentUser
+						? "border-rose-800"
+						: "border-transparent",
+				)}
+				id={`${id}`}
+			>
+				{firstMessageBlock && !isCurrentUser ? (
+					<p className="text-[14px] pt-2">
+						{sender?.name}
+						{id} --- {repliedMessage?.id}
+					</p>
+				) : null}
+				{repliedMessage ? (
+					<button
+						onClick={moveToRepliedMessage}
+						className="text-[14px] px-3 my-2 border-0 text-left border-l-[3px]  border-solid border-[rgb(32,34,37)]"
+					>
+						<p className="pb-1">{repliedMessage?.sender?.name}</p>
+						<p className="pt-1 line-clamp-1 ">{repliedMessage?.message}</p>
+					</button>
+				) : null}
+				<pre
+					className={`min-h-[24px] text-[14px] mg:text-[14.5px] 
+								shadow-(0px_2px_48px_rgba(0, 0, 0, 0.04)] 
+                                whitespace-pre-wrap	break-words font-montserrat`}
+				>
+					{message}
+				</pre>
+				<div className="flex items-center justify-end gap-3">
+					<time className="text-[12px]" title={created_at.toString()}>
+						{created_at as string}
+					</time>
+					<>
+						{status_view.show && isCurrentUser ? (
+							<Image
+								className="select-none"
+								draggable="false"
+								src={status_view.src}
+								width={status_view.size}
+								height={status_view.size}
+								alt={status_view.alt}
+								title={status_view.title}
+							/>
+						) : null}
+					</>
 				</div>
 			</div>
-		</li>
+		</>
 	);
 };
 
-export default Message;
+export default memo(Message);

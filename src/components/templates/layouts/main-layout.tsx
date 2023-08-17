@@ -1,10 +1,10 @@
 import { PropsWithChildren } from "react";
-import { ReactQueryProvider } from "../providers";
+import { ReactQueryProvider, RootStyleRegistry } from "../providers";
 
 const MainLayout = ({ children }: PropsWithChildren) => {
 	return (
 		<ReactQueryProvider>
-			<>{children}</>
+			<RootStyleRegistry>{children}</RootStyleRegistry>
 		</ReactQueryProvider>
 	);
 };

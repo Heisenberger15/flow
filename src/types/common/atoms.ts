@@ -33,6 +33,11 @@ export type CustomWrapperProps = PropsWithChildren<{
 // AVATAR
 
 export interface AvatarContainerProps
-	extends Omit<CustomImageContainerProps, "fallbackImage"> {}
+	extends Omit<
+		CustomImageContainerProps,
+		"fallbackImage" | "height" | "width"
+	> {
+	size?: number | `${number}`;
+}
 
 //AVATAR

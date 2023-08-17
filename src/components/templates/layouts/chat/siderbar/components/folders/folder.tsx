@@ -23,8 +23,7 @@ const Folder = () => {
 					src={""}
 					alt={"avatar profile image"}
 					className="w-[50px] h-[50px]"
-					width={50}
-					height={50}
+					size={50}
 				/>
 
 				<div className="h-full flex flex-col justify-evenly flex-1">

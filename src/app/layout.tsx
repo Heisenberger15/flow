@@ -1,11 +1,12 @@
 import MainLayout from "@/components/templates/layouts/main-layout";
 import "@/styles/globals.scss";
 import type { Metadata } from "next";
-import { Roboto } from "next/font/google";
+import { Montserrat } from "next/font/google";
 
-const roboto = Roboto({
-	weight: "400",
+const montserrat = Montserrat({
+	weight: ["300", "400", "500", "600", "700"],
 	subsets: ["latin"],
+	display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -20,7 +21,7 @@ export default function RootLayout({
 }) {
 	return (
 		<html lang="en">
-			<body className={roboto.className}>
+			<body className={montserrat.className}>
 				<MainLayout>{children}</MainLayout>
 			</body>
 		</html>

@@ -1,5 +1,5 @@
 export interface ChatType {
-	id: number;
+	id: number | string;
 	files: string[];
 	repliedMessage: ChatType | null;
 	sender: {
@@ -14,7 +14,6 @@ export interface ChatType {
 		view: "seen" | "rejected" | "sent";
 	};
 }
-
 export interface MessageType extends ChatType {
 	isCurrentUser: boolean;
 	firstMessageBlock: boolean;

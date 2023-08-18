@@ -15,7 +15,7 @@ export const UserInfo = () => {
 	const ripple = useRipple(ref);
 
 	return (
-		<div className="w-full h-[53px] bg-[#40444B] flex-shrink-0">
+		<div className="w-full h-[53px] bg-[#2d2d2d] flex-shrink-0">
 			<div className="flex items-center justify-between px-3 max-w-[95%] mx-auto gap-3 h-[inherit]">
 				<button
 					ref={ref}

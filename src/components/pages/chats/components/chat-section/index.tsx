@@ -1,6 +1,13 @@
 "use client";
 
-import { ScrollToView, cn, guidGenerator, randamChoice } from "@/utils";
+import {
+	ArrayFeatures,
+	ScrollToView,
+	cn,
+	guidGenerator,
+	randamChoice,
+	sleep,
+} from "@/utils";
 import { useEffect, useMemo, useState } from "react";
 import Message from "./message";
 import { chatDummyData, users, initChatMessage } from "./constants/dummy";
@@ -8,6 +15,7 @@ import { ChatType } from "./types/message";
 import AvatarFallbackComponent from "@/components/atoms/avatar/fallback-component";
 import dynamic from "next/dynamic";
 import { motion, AnimatePresence } from "framer-motion";
+import MessageLoading from "./message/loading";
 
 const Avatar = dynamic(
 	() => import("@/components/atoms").then((c) => c.Avatar),
@@ -58,86 +66,111 @@ const ChatSection = () => {
 				if (inx !== 0) return mes;
 			});
 	}, [dummy]);
-
+	const [isMounted, setMounted] = useState(false);
 	useEffect(() => {
-		ScrollToView("bottom-divider", { block: "end", inline: "end" });
+		ScrollToView("bottom-divider", {
+			block: "end",
+			inline: "end",
+			behavior: "smooth",
+		});
+		sleep(1000).then(() => {
+			setMounted(true);
+		});
 	}, [result]);
 
 	return (
 		<section
 			onClick={click}
-			className="flex flex-col-reverse overflow-y-scroll scrollbar"
+			className={cn(
+				"flex roll scrollbar",
+				!isMounted ? "overflow-hidden" : "overflow-y-scroll",
+			)}
 		>
-			<ul className="flex flex-col gap-4 w-full max-w-[95%] mx-auto">
-				<li id="top-divider" className="pt-[52px]" />{" "}
-				<AnimatePresence initial={false}>
-					{result?.map((chats, inx) => (
-						<motion.li
-							initial={{ opacity: 0 }}
-							animate={{ opacity: 1 }}
-							exit={{ opacity: 0 }}
-							key={inx}
-							className={cn(
-								"relative flex gap-3 items-end",
-								chats?.[0]?.sender?.id === 1 ? "justify-end" : "",
-							)}
-						>
-							{chats?.[0]?.sender?.id !== 1 ? (
-								<Avatar
-									className="sticky bottom-4 w-[40px] h-[40px]"
-									size={40}
-									src={chats?.[0]?.sender?.profilePicUrl}
-									alt={`${chats?.[0]?.sender?.name || "user"} profile image`}
-								/>
-							) : null}
-							<ul className="flex flex-col gap-2">
-								{chats?.map(
-									(
-										{
-											id,
-											files,
-											sender,
-											repliedMessage,
-											message,
-											created_at,
-											updated_at,
-											status,
-										},
-										index: number,
-									) => {
-										return (
-											<motion.li
-												initial={{ opacity: 0 }}
-												animate={{ opacity: 1 }}
-												exit={{ opacity: 0 }}
-												key={id}
-												className="flex items-end"
-											>
-												<Message
-													id={id}
-													files={files}
-													sender={sender}
-													firstMessageBlock={index === 0}
-													lastMessageBlock={index === chats.length - 1}
-													repliedMessage={repliedMessage}
-													message={message}
-													isCurrentUser={sender?.id === 1}
-													created_at={created_at}
-													updated_at={updated_at}
-													status={status}
-												/>
-											</motion.li>
-										);
-									},
+			<ul className="flex flex-col gap-4 w-full max-w-[95%] mx-auto h-fit">
+				<li id="top-divider" className="pt-[52px]" />
+				{isMounted === true ? (
+					<AnimatePresence initial={false}>
+						{result?.map((chats, inx) => (
+							<li
+								key={inx}
+								className={cn(
+									"relative flex gap-3 items-end",
+									chats?.[0]?.sender?.id === 1 ? "justify-end" : "",
 								)}
-							</ul>
-						</motion.li>
-					))}
-				</AnimatePresence>
-				<li id="bottom-divider" />
+							>
+								{chats?.[0]?.sender?.id !== 1 ? (
+									<Avatar
+										className="sticky bottom-4 w-[40px] h-[40px]"
+										size={40}
+										src={chats?.[0]?.sender?.profilePicUrl}
+										alt={`${chats?.[0]?.sender?.name || "user"} profile image`}
+									/>
+								) : null}
+								<ul className="flex flex-col gap-2">
+									{chats?.map(
+										(
+											{
+												id,
+												files,
+												sender,
+												repliedMessage,
+												message,
+												created_at,
+												updated_at,
+												status,
+											},
+											index: number,
+										) => {
+											return (
+												<motion.li
+													initial={{ opacity: 0 }}
+													animate={{ opacity: 1 }}
+													exit={{ opacity: 0 }}
+													key={id}
+													className="flex items-end"
+												>
+													<Message
+														id={id}
+														files={files}
+														sender={sender}
+														firstMessageBlock={index === 0}
+														lastMessageBlock={index === chats.length - 1}
+														repliedMessage={repliedMessage}
+														message={message}
+														isCurrentUser={sender?.id === 1}
+														created_at={created_at}
+														updated_at={updated_at}
+														status={status}
+													/>
+												</motion.li>
+											);
+										},
+									)}
+								</ul>
+							</li>
+						))}
+					</AnimatePresence>
+				) : (
+					<>
+						{fake(20).map((i) => (
+							<MessageLoading
+								key={i}
+								width={randamChoice(width)}
+								height={randamChoice(height)}
+								isCurrentUser={randamChoice(user)}
+							/>
+						))}
+					</>
+				)}
+				<li id="bottom-divider" className="pt-[6px]" />
 			</ul>
 		</section>
 	);
 };
 
 export default ChatSection;
+
+const width = [300, 540, 450, 670, 680];
+const height = [140, 40, 70, 110, 30];
+const user = [true, false];
+const fake = new ArrayFeatures().createFakeArray;

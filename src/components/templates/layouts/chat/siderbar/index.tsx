@@ -7,6 +7,7 @@ import ChatListSection from "./components/chat-list";
 
 const Sidebar = () => {
 	const Width = useMotionValue(350);
+
 	const handleDrag = useCallback(
 		(event: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => {
 			const newWidth = Width.get() + info.delta.x;
@@ -28,7 +29,7 @@ const Sidebar = () => {
 				<motion.div
 					drag="x"
 					dragConstraints={{ top: 0, left: 0, right: 0, bottom: 0 }}
-					className="h-full w-full bg-[#101010e3] cursor-w-resize"
+					className="h-full w-full bg-[#272727] cursor-w-resize"
 					dragElastic={0}
 					dragMomentum={false}
 					onDrag={handleDrag}

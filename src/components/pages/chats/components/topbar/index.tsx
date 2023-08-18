@@ -14,7 +14,7 @@ const Avatar = dynamic(
 const Topbar = () => {
 	return (
 		<header className="w-full h-[56px] bg-[rgb(44,44,44,0.8)] backdrop-blur absolute left-0 top-0 z-50">
-			<nav className="max-w-[95%] h-full mx-auto flex items-center justify-between">
+			<nav className="max-w-[95%] h-full mx-auto flex items-center justify-between shadow-2xl">
 				<div className="flex items-center gap-2">
 					<Avatar className="h-[40px] w-[40px]" src={""} alt={""} />
 

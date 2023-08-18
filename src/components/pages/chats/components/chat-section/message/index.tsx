@@ -31,8 +31,10 @@ const Message = ({
 		<>
 			<div
 				className={cn(
-					`bg-[#40444B] px-3 py-2 rounded-[0.9375rem] select-text flex flex-col gap-2 w-fit min-w-[165px] max-w-full ipad:max-w-[680px] border border-solid transition-all`,
-					isCurrentUser ? "!ml-auto !bg-[#2F3136]" : "",
+					`px-3 py-2 rounded-[0.9375rem] select-text flex flex-col gap-2 w-fit min-w-[165px] max-w-full ipad:max-w-[680px] border border-solid transition-all`,
+					isCurrentUser
+						? "!ml-auto bg-[#1566A3] border-[#1566A3]"
+						: "bg-[#393c49]",
 					status_view.title === "rejected" && isCurrentUser
 						? "border-rose-800"
 						: "border-transparent",

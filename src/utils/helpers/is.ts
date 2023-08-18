@@ -10,7 +10,7 @@ export const isEmpty = (value: unknown): boolean => {
 	);
 };
 
-export const isObject = (obj: unknown) => {
+export const isObject = (obj: unknown): obj is object => {
 	return (
 		typeof obj === "object" &&
 		!!obj &&
@@ -19,12 +19,12 @@ export const isObject = (obj: unknown) => {
 	);
 };
 
-export function isArray(obj: unknown) {
-	return obj instanceof Array || Array.isArray(obj);
+export function isArray<T>(array: unknown): array is Array<T> {
+	return array instanceof Array || Array.isArray(array);
 }
 
-export const isNumber = (val: unknown) =>
+export const isNumber = (val: unknown): val is number =>
 	typeof val === "number" && val === val;
 
-export const isString = (value: unknown): boolean =>
+export const isString = (value: unknown): value is string =>
 	typeof value === "string" || value instanceof String;

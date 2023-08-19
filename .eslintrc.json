@@ -1,3 +1,45 @@
 {
-  "extends": "next/core-web-vitals"
+	"plugins": ["@typescript-eslint"],
+	"extends": [
+		"next/core-web-vitals",
+		"next",
+		"prettier",
+		"plugin:@tanstack/eslint-plugin-query/recommended",
+		"eslint:recommended",
+		"plugin:@typescript-eslint/recommended",
+		"plugin:storybook/recommended"
+	],
+	"rules": {
+		"no-mixed-spaces-and-tabs": ["error", "smart-tabs"],
+		"no-duplicate-case": "off",
+		"no-func-assign": "error",
+		"@typescript-eslint/no-explicit-any": "warn",
+		"react/no-unescaped-entities": "off",
+		"no-unused-vars": [
+			1,
+			{
+				"args": "after-used",
+				"argsIgnorePattern": "^_"
+			}
+		],
+		"import/newline-after-import": [
+			"error",
+			{
+				"count": 1
+			}
+		],
+		"react/function-component-definition": [
+			1,
+			{
+				"namedComponents": ["function-declaration", "arrow-function"],
+				"unnamedComponents": ["arrow-function"]
+			}
+		],
+		"@typescript-eslint/no-unused-vars": [
+			2,
+			{
+				"args": "none"
+			}
+		]
+	}
 }

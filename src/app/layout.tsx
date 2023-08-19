@@ -1,14 +1,7 @@
 import MainLayout from "@/components/templates/layouts/main-layout";
+import { montserrat } from "@/constants/fonts";
 import "@/styles/globals.scss";
 import type { Metadata } from "next";
-import { Montserrat } from "next/font/google";
-
-export const montserrat = Montserrat({
-	weight: ["300", "400", "500", "600", "700"],
-	subsets: ["latin"],
-	// display: "swap",
-	variable: "--montserrat-font",
-});
 
 export const metadata: Metadata = {
 	title: "Flow",
@@ -22,7 +15,7 @@ export default function RootLayout({
 }) {
 	return (
 		<html lang="en" className={montserrat.variable}>
-			<body>
+			<body className={montserrat.className}>
 				<MainLayout>{children}</MainLayout>
 			</body>
 		</html>

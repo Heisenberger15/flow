@@ -12,14 +12,14 @@ const Avatar = dynamic(
 );
 export const Tabs = () => {
 	return (
-		<ul className="bg-[#101010e3] flex flex-col">
+		<ul className="bg-[var(--color-background-tab)] flex flex-col">
 			<Tab>
-				<div className="bg-cyan-950 rounded-full w-[50px] h-[50px] flex items-center justify-center text-[18px] font-semibold uppercase">
+				<div className="bg-[var(--color-user-4)] rounded-full w-[50px] h-[50px] flex items-center justify-center text-[18px] font-semibold uppercase text-[var(--color)]">
 					<p>{convertStringLabel("sina parsa")}</p>
 				</div>
 			</Tab>
 			<Tab>
-				<div className="bg-cyan-950 rounded-full w-[50px] h-[50px] flex items-center justify-center text-[18px] font-semibold uppercase">
+				<div className="bg-[var(--color-user-5)] rounded-full w-[50px] h-[50px] flex items-center justify-center text-[18px] font-semibold uppercase text-[var(--color)]">
 					<p>{convertStringLabel("flow")}</p>
 				</div>
 			</Tab>

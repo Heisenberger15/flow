@@ -24,7 +24,7 @@ const useStyles = createStyles(() => ({
 		},
 
 		'&[data-orientation="vertical"] .mantine-ScrollArea-thumb': {
-			backgroundColor: "#101010e3",
+			backgroundColor: "#fff",
 		},
 	},
 }));

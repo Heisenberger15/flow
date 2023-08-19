@@ -1,32 +1,26 @@
 "use client";
 
-import { useRipple } from "@/hooks";
-import Link from "next/link";
-import { PropsWithChildren, useRef } from "react";
+import { PropsWithChildren } from "react";
 import { Tooltip } from "@mantine/core";
+import { RippleButtonOrLink } from "@/components/atoms";
 
 const Tab = ({ children }: PropsWithChildren) => {
-	const ref = useRef<HTMLAnchorElement>(null);
-	const ripple = useRipple(ref);
-
 	return (
 		<li className="relative w-full h-[70px] group">
 			<Tooltip
 				label="Tooltip"
-				color="#111"
+				color="var(--color-background-tooltip)"
 				position="right"
 				withArrow
 				arrowPosition="center"
 				transitionProps={{ transition: "slide-left", duration: 100 }}
 			>
-				<Link
-					ref={ref}
+				<RippleButtonOrLink
 					href={""}
-					className="w-full h-full flex justify-center items-center relative overflow-hidden rounded-md group-hover:bg-[rgba(255,255,255,0.06)] transition-all"
+					className="w-full h-full flex justify-center items-center relative overflow-hidden rounded-md group-hover:bg-[var(--color-background-chat-folder-hover)] transition-all"
 				>
-					{ripple}
 					{children}
-				</Link>
+				</RippleButtonOrLink>
 			</Tooltip>
 		</li>
 	);

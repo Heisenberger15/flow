@@ -62,7 +62,7 @@ export const useRipple = <T extends HTMLElement>(ref: React.RefObject<T>) => {
 					...style,
 					//should be absolutely positioned
 					position: "absolute",
-					backgroundColor: "#FFFFFF",
+					backgroundColor: "var(--color)",
 					opacity: "25%",
 					transform: "scale(0)",
 					// add ripple animation from styles.css

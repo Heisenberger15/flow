@@ -1,37 +1,37 @@
 @use "tailwind" as *;
 @use "reset-all" as *;
 @use "variables" as *;
+@use "themes" as *;
 
 .scrollbar {
 	&::-webkit-scrollbar-thumb {
 		border-radius: 50px;
 		background: transparent;
-		transition: all 150ms;
 	}
 	&::-webkit-scrollbar {
-		width: 8px;
+		width: var(--scrollbar-width);
 	}
 	&:hover {
 		&::-webkit-scrollbar-thumb {
 			border-radius: 50px;
-			background: #222222;
+			background: var(--color-background-scroll);
 			transition: all 150ms;
 		}
 
 		&::-webkit-scrollbar {
-			width: 8px;
+			width: var(--scrollbar-width);
 		}
 	}
 
 	&-active {
 		&::-webkit-scrollbar-thumb {
 			border-radius: 50px;
-			background: #222222;
+			background: var(--color-background-scroll);
 			transition: all 150ms;
 		}
 
 		&::-webkit-scrollbar {
-			width: 8px;
+			width: var(--scrollbar-width);
 		}
 	}
 

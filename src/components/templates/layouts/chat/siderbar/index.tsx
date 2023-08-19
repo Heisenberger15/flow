@@ -29,7 +29,7 @@ const Sidebar = () => {
 				<motion.div
 					drag="x"
 					dragConstraints={{ top: 0, left: 0, right: 0, bottom: 0 }}
-					className="h-full w-full bg-[#272727] cursor-w-resize"
+					className="h-full w-full bg-[var(--color-background)] cursor-w-resize"
 					dragElastic={0}
 					dragMomentum={false}
 					onDrag={handleDrag}

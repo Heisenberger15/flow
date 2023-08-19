@@ -11,10 +11,11 @@ export function CustomImage({
 	className,
 	imageClassName = className,
 	fallbackImage,
+	src,
 	...rest
 }: CustomImageContainerProps) {
-	const [imageHasError, setImageHasError] = useState<boolean>(!!rest.src);
-	const [imageLoaded, setImageLoaded] = useState<boolean>(!!rest.src);
+	const [imageHasError, setImageHasError] = useState<boolean>(false);
+	const [imageLoaded, setImageLoaded] = useState<boolean>(false);
 
 	const props = {
 		wrapper: {
@@ -36,6 +37,7 @@ export function CustomImage({
 			imageClassName,
 			setImageHasError,
 			setImageLoaded,
+			src,
 			...rest,
 		},
 	};

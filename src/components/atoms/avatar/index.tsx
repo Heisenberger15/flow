@@ -9,6 +9,7 @@ export function Avatar({
 	size = 50,
 	alt = "avatar image",
 	className,
+	src,
 	...rest
 }: AvatarContainerProps) {
 	return (
@@ -19,6 +20,7 @@ export function Avatar({
 				width: size,
 				height: size,
 				alt,
+				src: AvatarPlaceholder,
 				className: cn("!rounded-full !aspect-square", className),
 				fallbackImage: AvatarPlaceholder,
 				...rest,

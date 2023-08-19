@@ -1,21 +1,33 @@
 "use client";
 
+import { ScrollToView, cn, guidGenerator, randamChoice, sleep } from "@/utils";
+import { useMemo, useState } from "react";
 import {
-	ArrayFeatures,
-	ScrollToView,
-	cn,
-	guidGenerator,
-	randamChoice,
-	sleep,
-} from "@/utils";
-import { useEffect, useMemo, useState } from "react";
-import Message from "./message";
-import { chatDummyData, users, initChatMessage } from "./constants/dummy";
+	chatDummyData,
+	users,
+	initChatMessage,
+	convertData,
+} from "./constants/dummy";
 import { ChatType } from "./types/message";
 import AvatarFallbackComponent from "@/components/atoms/avatar/fallback-component";
 import dynamic from "next/dynamic";
 import { motion, AnimatePresence } from "framer-motion";
+import { useIsomorphicEffect } from "@mantine/hooks";
 import MessageLoading from "./message/loading";
+import ChatSectionLoading, {
+	widthForGenereteMessageSize,
+	heightForGenereteMessageSize,
+} from "./chat-section-loading";
+
+const Message = dynamic(() => import("./message"), {
+	ssr: false,
+	loading: () => (
+		<MessageLoading
+			width={randamChoice(widthForGenereteMessageSize)}
+			height={randamChoice(heightForGenereteMessageSize)}
+		/>
+	),
+});
 
 const Avatar = dynamic(
 	() => import("@/components/atoms").then((c) => c.Avatar),
@@ -47,18 +59,6 @@ const ChatSection = () => {
 		setDummy((prev) => [...prev, fakeNewChat]);
 	};
 
-	const convertData = (acc: ChatType[][], curr: ChatType) => {
-		const lastIndexOfArray = acc.at(-1);
-		if (
-			lastIndexOfArray &&
-			lastIndexOfArray?.[0]?.sender?.id === curr?.sender?.id
-		) {
-			lastIndexOfArray?.push(curr);
-		} else {
-			acc?.push([curr]);
-		}
-		return acc;
-	};
 	const result = useMemo(() => {
 		return dummy
 			?.reduce<ChatType[][]>(convertData, [[initChatMessage]])
@@ -67,12 +67,14 @@ const ChatSection = () => {
 			});
 	}, [dummy]);
 	const [isMounted, setMounted] = useState(false);
-	useEffect(() => {
+
+	useIsomorphicEffect(() => {
 		ScrollToView("bottom-divider", {
 			block: "end",
 			inline: "end",
 			behavior: "smooth",
 		});
+
 		sleep(1000).then(() => {
 			setMounted(true);
 		});
@@ -82,13 +84,13 @@ const ChatSection = () => {
 		<section
 			onClick={click}
 			className={cn(
-				"flex roll scrollbar",
+				"scrollbar",
 				!isMounted ? "overflow-hidden" : "overflow-y-scroll",
 			)}
 		>
 			<ul className="flex flex-col gap-4 w-full max-w-[95%] mx-auto h-fit">
 				<li id="top-divider" className="pt-[52px]" />
-				{isMounted === true ? (
+				{isMounted ? (
 					<AnimatePresence initial={false}>
 						{result?.map((chats, inx) => (
 							<li
@@ -106,7 +108,13 @@ const ChatSection = () => {
 										alt={`${chats?.[0]?.sender?.name || "user"} profile image`}
 									/>
 								) : null}
-								<ul className="flex flex-col gap-2">
+								<ul
+									className={`flex flex-col gap-2 ${
+										chats?.[0]?.sender?.id === 1
+											? "justify-start [&>li_div]:!ml-auto [&>li_div]:bg-[var(--color-background-chat-message-primary)] [&>li_div]:rounded-br-[0.375rem] [&>li_div]:rounded-tr-[0.375rem]"
+											: "justify-end [&>li_div]:bg-[var(--color-background-chat-message-secondary)] [&>li_div]:rounded-bl-[0.375rem] [&>li_div]:rounded-tl-[0.375rem]"
+									}`}
+								>
 									{chats?.map(
 										(
 											{
@@ -127,7 +135,6 @@ const ChatSection = () => {
 													animate={{ opacity: 1 }}
 													exit={{ opacity: 0 }}
 													key={id}
-													className="flex items-end"
 												>
 													<Message
 														id={id}
@@ -151,16 +158,7 @@ const ChatSection = () => {
 						))}
 					</AnimatePresence>
 				) : (
-					<>
-						{fake(20).map((i) => (
-							<MessageLoading
-								key={i}
-								width={randamChoice(width)}
-								height={randamChoice(height)}
-								isCurrentUser={randamChoice(user)}
-							/>
-						))}
-					</>
+					<ChatSectionLoading />
 				)}
 				<li id="bottom-divider" className="pt-[6px]" />
 			</ul>
@@ -169,8 +167,3 @@ const ChatSection = () => {
 };
 
 export default ChatSection;
-
-const width = [300, 540, 450, 670, 680];
-const height = [140, 40, 70, 110, 30];
-const user = [true, false];
-const fake = new ArrayFeatures().createFakeArray;

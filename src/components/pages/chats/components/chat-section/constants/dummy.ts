@@ -1,3 +1,4 @@
+import { ArrayFeatures, randamChoice } from "@/utils";
 import { ChatType } from "../types/message";
 
 export const users = [
@@ -431,4 +432,42 @@ export const initChatMessage: ChatType = {
 	status: {
 		view: "sent",
 	},
+};
+
+export const convertData = (acc: ChatType[][], curr: ChatType) => {
+	const lastIndexOfArray = acc.at(-1);
+	if (
+		lastIndexOfArray &&
+		lastIndexOfArray?.[0]?.sender?.id === curr?.sender?.id
+	) {
+		lastIndexOfArray?.push(curr);
+	} else {
+		acc?.push([curr]);
+	}
+	return acc;
+};
+
+export const chatDummyDataForLoading = () => {
+	const faker = new ArrayFeatures().createFakeArray;
+
+	const result: ChatType[] = faker(25).map((id) => {
+		return {
+			id,
+			files: [""],
+			repliedMessage: null,
+			sender: randamChoice(users),
+			message: "",
+			created_at: "",
+			updated_at: "",
+			status: {
+				view: "sent",
+			},
+		};
+	});
+
+	return result
+		?.reduce<ChatType[][]>(convertData, [[initChatMessage]])
+		.filter((mes, inx) => {
+			if (inx !== 0) return mes;
+		});
 };

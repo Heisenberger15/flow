@@ -8,7 +8,7 @@ const AvatarFallbackComponent = ({
 	return (
 		<span
 			className={cn(
-				"animate-pulse block bg-[#D9D9D9] relative !rounded-full !aspect-square",
+				"animate-pulse block bg-[var(--color-background-image)] relative !rounded-full !aspect-square",
 				className,
 			)}
 		></span>

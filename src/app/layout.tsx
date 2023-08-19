@@ -3,10 +3,11 @@ import "@/styles/globals.scss";
 import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
 
-const montserrat = Montserrat({
+export const montserrat = Montserrat({
 	weight: ["300", "400", "500", "600", "700"],
 	subsets: ["latin"],
-	display: "swap",
+	// display: "swap",
+	variable: "--montserrat-font",
 });
 
 export const metadata: Metadata = {
@@ -20,8 +21,8 @@ export default function RootLayout({
 	children: React.ReactNode;
 }) {
 	return (
-		<html lang="en">
-			<body className={montserrat.className}>
+		<html lang="en" className={montserrat.variable}>
+			<body>
 				<MainLayout>{children}</MainLayout>
 			</body>
 		</html>

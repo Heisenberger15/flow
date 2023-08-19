@@ -1,13 +1,23 @@
+"use client";
+
 import type { PropsWithChildren } from "react";
-import Sidebar from "./siderbar";
+import { montserrat } from "@/app/layout";
+import { useTheme } from "@/hooks";
+import dynamic from "next/dynamic";
+
+const Main = dynamic(() => import("./main"), {
+	ssr: false,
+});
 
 export const ChatLayout = (props: PropsWithChildren) => {
+	const { theme } = useTheme();
+
 	return (
-		<div className="grid grid-cols-[auto_1fr] grid-row-[100%] w-full h-screen bg-[#202020]">
-			<Sidebar />
-			<main className="w-full h-full bg-[#101010e3] text-white">
-				{props.children}
-			</main>
-		</div>
+		<body
+			className={`overflow-hidden ${montserrat.className}`}
+			data-theme={theme}
+		>
+			<Main>{props.children}</Main>
+		</body>
 	);
 };

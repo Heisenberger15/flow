@@ -4,7 +4,7 @@ export const Searchbar = () => {
 			<input
 				type="text"
 				dir="auto"
-				className="w-full max-w-[calc(100%_-_2rem)] px-3 bg-[rgb(44,44,44)] mx-auto rounded-[1.375rem] h-[44px] text-white"
+				className="w-full max-w-[calc(100%_-_2rem)] px-3 bg-[var(--color-background-chat-searchbar)] mx-auto rounded-[1.375rem] h-[44px]"
 				placeholder="Search"
 				autoComplete="off"
 			/>

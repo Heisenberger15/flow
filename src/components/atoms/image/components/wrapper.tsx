@@ -10,7 +10,7 @@ export function CustomImageWrapper({
 		<span
 			className={cn(
 				isLoading && "animate-pulse",
-				"block bg-[#D9D9D9] relative",
+				"block bg-[var(--color-background-image)] relative",
 				className,
 			)}
 		>

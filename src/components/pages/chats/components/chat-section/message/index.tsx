@@ -31,10 +31,12 @@ const Message = ({
 		<>
 			<div
 				className={cn(
-					`bg-[#40444B] px-3 py-2 rounded-[0.9375rem] select-text flex flex-col gap-2 w-fit min-w-[165px] max-w-full ipad:max-w-[680px] border border-solid transition-all`,
-					isCurrentUser ? "!ml-auto !bg-[#2F3136]" : "",
+					`px-3 py-2 rounded-[0.9375rem] select-text flex flex-col gap-2 w-fit min-w-[165px] max-w-full ipad:max-w-[680px] border border-solid`,
+					isCurrentUser
+						? "border-[var(--color-background-chat-message-primary)]"
+						: "",
 					status_view.title === "rejected" && isCurrentUser
-						? "border-rose-800"
+						? "border-[var(--color-error)]"
 						: "border-transparent",
 
 					isCurrentUser
@@ -58,7 +60,12 @@ const Message = ({
 				{repliedMessage ? (
 					<button
 						onClick={moveToRepliedMessage}
-						className="text-[14px] px-3 my-2 border-0 text-left border-l-[3px]  border-solid border-[rgb(32,34,37)]"
+						className={cn(
+							"text-[14px] px-3 my-2 border-0 text-left border-l-[3px]  border-solid border-[var(--color-border-replied)]",
+							isCurrentUser
+								? "border-[var(--color-border-replied-primary)]"
+								: "border-[var(--color-border-replied-secondary)]",
+						)}
 					>
 						<p className="pb-1">{repliedMessage?.sender?.name}</p>
 						<p className="pt-1 line-clamp-1 ">{repliedMessage?.message}</p>

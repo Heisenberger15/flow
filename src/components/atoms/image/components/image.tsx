@@ -10,6 +10,7 @@ export const ImageComp = ({
 	setImageLoaded,
 	// eslint-disable-next-line no-unused-vars
 	isLoading,
+	src,
 	...rest
 }: CustomImageProps) => {
 	if (imageHasError) return null;
@@ -18,9 +19,10 @@ export const ImageComp = ({
 		<Image
 			draggable={false}
 			alt={alt}
+			src={src}
 			{...rest}
 			className={cn(
-				"image_fadeIn transition-all w-full h-full object-cover object-center bg-[#D9D9D9]",
+				"image_fadeIn transition-all w-full h-full object-cover object-center bg-[var(--color-background-image)]",
 				imageClassName,
 			)}
 			onError={({ currentTarget }) => {

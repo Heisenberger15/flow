@@ -22,7 +22,7 @@ export function ImageFallback({
 				src={fallbackImage}
 				fetchPriority="low"
 				className={cn(
-					"transition-all image_fadeIn w-full h-full object-cover object-center bg-[#D9D9D9]",
+					"transition-all image_fadeIn w-full h-full object-cover object-center bg-[var(--color-background-image)]",
 					imageClassName,
 				)}
 				onLoadingComplete={(image) => {

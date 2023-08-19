@@ -46,7 +46,7 @@ const TextareaForm = ({ handleSubmit, text, control }: ITextarea) => {
 						ref={textAreaRef}
 						rows={1}
 						placeholder={`Message #general`}
-						className="scrollbar-hide align-middle w-full min-h-[inherit] p-3 max-h-[inherit] h-full resize-none text-white text-[14px] border-[0.1px] !border-transparent !shadow-none !outline-0 bg-transparent"
+						className="scrollbar-hide align-middle w-full min-h-[inherit] p-3 max-h-[inherit] h-full resize-none text-[14px] border-[0.1px] !border-transparent !shadow-none !outline-0 bg-transparent"
 					/>
 				)}
 			/>

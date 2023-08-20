@@ -32,7 +32,7 @@ const Folder = () => {
 						<h3 className="font-medium text-[1rem]">flow</h3>
 						<time className="text-[0.75rem]">11:28 PM</time>
 					</div>
-					<p className="text-[1rem]">
+					<p className="text-[1rem] text-left">
 						<span>sina parsa: </span>
 						<span className="text-[var(--color-secondary)]"> aha bashe</span>
 					</p>

@@ -2,7 +2,7 @@ import { chatDummyDataForLoading } from "./constants/dummy";
 import AvatarFallbackComponent from "@/components/atoms/avatar/fallback-component";
 import MessageLoading from "./message/loading";
 import { cn, randamChoice } from "@/utils";
-import { memo, useMemo } from "react";
+import { useMemo } from "react";
 
 const ChatSectionLoading = () => {
 	const result = useMemo(() => chatDummyDataForLoading(), []);
@@ -44,7 +44,7 @@ const ChatSectionLoading = () => {
 	);
 };
 
-export default memo(ChatSectionLoading);
+export default ChatSectionLoading;
 
 export const widthForGenereteMessageSize = [300, 540, 450, 670, 680];
 export const heightForGenereteMessageSize = [140, 70, 110, 90];

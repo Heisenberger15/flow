@@ -1,43 +1,38 @@
-import Tab from "./tab";
-import dynamic from "next/dynamic";
-import AvatarFallbackComponent from "@/components/atoms/avatar/fallback-component";
-import { convertStringLabel } from "@/utils";
+import { type SetStateAction, type Dispatch, useState } from "react";
+import { MobileTabs } from "./mobile";
+import { DesktopTabs } from "./desktop";
 
-const Avatar = dynamic(
-	() => import("@/components/atoms").then((c) => c.Avatar),
-	{
-		ssr: false,
-		loading: () => <AvatarFallbackComponent />,
-	},
-);
-export const Tabs = () => {
+const tabs = [
+	{ id: "all", label: "All" },
+	{ id: "personal", label: "Personal" },
+	{ id: "projects", label: "Projects" },
+	{ id: "uni", label: "UNI" },
+	{ id: "groups", label: "Groups" },
+	{ id: "channels", label: "Channels" },
+	{ id: "fav", label: "Fav" },
+	{ id: "unread", label: "Unread" },
+];
+
+export const Tabs = ({
+	variants = "desktop",
+}: {
+	variants: "mobile" | "desktop";
+}) => {
+	const [activeTab, setActiveTab] = useState(tabs[0].id);
+
 	return (
-		<ul className="bg-[var(--color-background-tab)] flex flex-col">
-			<Tab>
-				<div className="bg-[var(--color-user-4)] rounded-full w-[50px] h-[50px] flex items-center justify-center text-[18px] font-semibold uppercase text-[var(--color)]">
-					<p>{convertStringLabel("sina parsa")}</p>
-				</div>
-			</Tab>
-			<Tab>
-				<div className="bg-[var(--color-user-5)] rounded-full w-[50px] h-[50px] flex items-center justify-center text-[18px] font-semibold uppercase text-[var(--color)]">
-					<p>{convertStringLabel("flow")}</p>
-				</div>
-			</Tab>
-			<Tab>
-				<Avatar src={""} alt={""} className="w-[50px] h-[50px]" size={50} />
-			</Tab>
-			<Tab>
-				<Avatar src={""} alt={""} className="w-[50px] h-[50px]" size={50} />
-			</Tab>
-			<Tab>
-				<Avatar src={""} alt={""} className="w-[50px] h-[50px]" size={50} />
-			</Tab>
-			<Tab>
-				<Avatar src={""} alt={""} className="w-[50px] h-[50px]" size={50} />
-			</Tab>
-			<Tab>
-				<Avatar src={""} alt={""} className="w-[50px] h-[50px]" size={50} />
-			</Tab>
-		</ul>
+		<>
+			{variants === "desktop" ? (
+				<DesktopTabs {...{ activeTab, setActiveTab, tabs }} />
+			) : (
+				<MobileTabs {...{ activeTab, setActiveTab, tabs }} />
+			)}
+		</>
 	);
 };
+
+export interface TabsProps {
+	tabs: typeof tabs;
+	activeTab: string;
+	setActiveTab: Dispatch<SetStateAction<string>>;
+}

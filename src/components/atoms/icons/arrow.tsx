@@ -15,8 +15,8 @@ export const ArrowIcon = ({ className, ...rest }: SVGProps<SVGSVGElement>) => {
 			<path
 				d="M6 1L6 12M6 12L1 7M6 12L11 7"
 				stroke="white"
-				stroke-linecap="round"
-				stroke-linejoin="round"
+				strokeLinecap="round"
+				strokeLinejoin="round"
 			/>
 		</svg>
 	);

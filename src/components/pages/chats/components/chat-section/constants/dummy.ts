@@ -1,5 +1,5 @@
 import { ArrayFeatures, randamChoice } from "@/utils";
-import { ChatType } from "../types/message";
+import { ChatType } from "@/types";
 
 export const users = [
 	{

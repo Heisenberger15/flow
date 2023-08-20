@@ -5,10 +5,12 @@
 
 .scrollbar {
 	&::-webkit-scrollbar-thumb {
+		height: var(--scrollbar-width);
 		border-radius: 50px;
 		background: transparent;
 	}
 	&::-webkit-scrollbar {
+		height: var(--scrollbar-width);
 		width: var(--scrollbar-width);
 	}
 	&:hover {

@@ -2,7 +2,7 @@ import { ScrollToView, cn } from "@/utils";
 import Image from "next/image";
 import { memo, useMemo } from "react";
 import { viewStatus } from "../utils/view-status";
-import { MessageType } from "../types/message";
+import { MessageType } from "@/types";
 
 const Message = ({
 	id,

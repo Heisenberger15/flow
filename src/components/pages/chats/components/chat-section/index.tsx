@@ -1,14 +1,9 @@
 "use client";
 
 import { ScrollToView, cn, guidGenerator, randamChoice, sleep } from "@/utils";
-import { useMemo, useState } from "react";
-import {
-	chatDummyData,
-	users,
-	initChatMessage,
-	convertData,
-} from "./constants/dummy";
-import { ChatType } from "./types/message";
+import { useState } from "react";
+import { chatDummyData, users } from "./constants/dummy";
+import { ChatType } from "@/types";
 import AvatarFallbackComponent from "@/components/atoms/avatar/fallback-component";
 import dynamic from "next/dynamic";
 import { motion, AnimatePresence } from "framer-motion";
@@ -18,6 +13,7 @@ import ChatSectionLoading, {
 	widthForGenereteMessageSize,
 	heightForGenereteMessageSize,
 } from "./chat-section-loading";
+import { useChats } from "@/hooks";
 
 const Message = dynamic(() => import("./message"), {
 	ssr: false,
@@ -38,8 +34,14 @@ const Avatar = dynamic(
 		),
 	},
 );
+
 const ChatSection = () => {
-	const [dummy, setDummy] = useState(chatDummyData);
+	const [data, setData] = useState(chatDummyData);
+	const [isMounted, setMounted] = useState(false);
+
+	const {
+		format: { convertedDataMessage, placeHolder },
+	} = useChats().worker({ data });
 
 	const click = () => {
 		const fakeNewChat: ChatType = {
@@ -56,17 +58,8 @@ const ChatSection = () => {
 			},
 		};
 
-		setDummy((prev) => [...prev, fakeNewChat]);
+		setData((prev) => [...prev, fakeNewChat]);
 	};
-
-	const result = useMemo(() => {
-		return dummy
-			?.reduce<ChatType[][]>(convertData, [[initChatMessage]])
-			.filter((mes, inx) => {
-				if (inx !== 0) return mes;
-			});
-	}, [dummy]);
-	const [isMounted, setMounted] = useState(false);
 
 	useIsomorphicEffect(() => {
 		ScrollToView("bottom-divider", {
@@ -78,21 +71,15 @@ const ChatSection = () => {
 		sleep(1000).then(() => {
 			setMounted(true);
 		});
-	}, [result]);
+	}, [convertedDataMessage]);
 
 	return (
-		<section
-			onClick={click}
-			className={cn(
-				"scrollbar",
-				!isMounted ? "overflow-hidden" : "overflow-y-scroll",
-			)}
-		>
+		<section onClick={click} className={"scrollbar overflow-y-scroll"}>
 			<ul className="flex flex-col gap-4 w-full max-w-[95%] mx-auto h-fit">
 				<li id="top-divider" className="pt-[52px]" />
-				{isMounted ? (
+				{isMounted && !placeHolder ? (
 					<AnimatePresence initial={false}>
-						{result?.map((chats, inx) => (
+						{convertedDataMessage?.map((chats, inx) => (
 							<li
 								key={inx}
 								className={cn(

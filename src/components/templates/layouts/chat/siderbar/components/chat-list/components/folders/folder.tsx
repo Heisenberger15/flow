@@ -2,6 +2,7 @@
 
 import { RippleButtonOrLink } from "@/components/atoms";
 import AvatarFallbackComponent from "@/components/atoms/avatar/fallback-component";
+import { useHandleMenu } from "@/stores";
 import dynamic from "next/dynamic";
 
 const Avatar = dynamic(
@@ -13,12 +14,12 @@ const Avatar = dynamic(
 );
 
 const Folder = () => {
+	const { setMenuOpen } = useHandleMenu();
+	const showChatSection = () => setMenuOpen(false);
+
 	return (
-		<li className="w-full h-[68px] group">
-			<RippleButtonOrLink
-				href={""}
-				className="flex items-center relative gap-4 max-w-[95%] mx-auto px-3 rounded-md py-1 overflow-hidden w-full h-full group-hover:bg-[var(--color-background-chat-folder-hover)] transition-all"
-			>
+		<li className="w-full h-[68px] group" onClick={showChatSection}>
+			<RippleButtonOrLink className="flex items-center relative gap-4 max-w-[95%] mx-auto px-3 rounded-md py-1 overflow-hidden w-full h-full group-hover:bg-[var(--color-background-chat-folder-hover)] transition-all">
 				<Avatar
 					src={""}
 					alt={"avatar profile image"}

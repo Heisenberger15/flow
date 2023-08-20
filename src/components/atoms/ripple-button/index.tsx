@@ -10,14 +10,14 @@ type RippleButtonOrLinkProps = ComponentProps<"button"> & ComponentProps<"a">;
 export interface Props extends RippleButtonOrLinkProps {}
 
 function RippleButtonOrLink(
-	{ className, children, href, ...props }: Props,
-	ref: Ref<unknown>,
+	{ className, children, href, ref, ...props }: Props,
+	componentRef: Ref<unknown>,
 ) {
 	const isLink = typeof href !== "undefined";
 	const elementRef = useRef(null);
 	const ripple = useRipple(elementRef);
 
-	const mergedRef = useMergedRef(elementRef, ref);
+	const mergedRef = useMergedRef(elementRef, componentRef);
 
 	if (isLink) {
 		return (
@@ -25,6 +25,7 @@ function RippleButtonOrLink(
 				className={`!relative !overflow-hidden ${className}`}
 				ref={mergedRef}
 				href={href}
+				{...props}
 			>
 				{ripple}
 				{children}
@@ -38,8 +39,8 @@ function RippleButtonOrLink(
 			ref={mergedRef}
 			{...props}
 		>
-			{ripple}
 			{children}
+			{ripple}
 		</button>
 	);
 }

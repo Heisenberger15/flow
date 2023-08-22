@@ -26,7 +26,7 @@ const Topbar = () => {
 						onClick={showList}
 						className="w-[40px] h-[40px] rounded-full flex items-center justify-center lt:hidden"
 					>
-						<ArrowIcon className="rotate-90" />
+						<ArrowIcon className="rotate-90 [&_path]:stroke-[var(--color-arrow)]" />
 					</RippleButtonOrLink>
 					<Avatar className="h-[40px] w-[40px]" src={""} alt={""} />
 

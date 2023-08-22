@@ -18,10 +18,10 @@ const MessageInput = () => {
 	const props = { handleSubmit, control, text };
 
 	return (
-		<footer className="w-full min-h-[60px] pb-[16px] relative max-w-[95%] mx-auto">
+		<footer className="w-full min-h-[40px] lt:min-h-[60px] pb-[5px] lt:pb-[16px] relative max-w-[95%] mx-auto">
 			<div
 				className="bg-[var(--color-background-chat-input)] -translate-y-[6px]
-       w-full min-h-[44px] rounded-[8px] flex px-4 max-h-[200px] justify-between items-end"
+       w-full min-h-[40px] rounded-[8px] flex px-4 max-h-[200px] justify-between items-end"
 			>
 				<TextareaForm {...props} />
 			</div>

@@ -83,7 +83,7 @@ const ChatSection = () => {
 							<li
 								key={inx}
 								className={cn(
-									"relative flex gap-3 items-end",
+									"relative flex gap-2 lt:gap-3 items-end",
 									chats?.[0]?.sender?.id === 1 ? "justify-end" : "",
 								)}
 							>

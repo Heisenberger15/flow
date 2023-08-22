@@ -32,7 +32,7 @@ const Sidebar = () => {
 		>
 			<motion.div
 				style={{ width: matches ? Width : "100%" }}
-				className="grid grid-cols-[auto_3px] min-w-full"
+				className="grid lt:grid-cols-[auto_3px] min-w-full"
 			>
 				<ChatListSection />
 				<motion.div

@@ -30,7 +30,7 @@ export const UserInfo = () => {
 					className="flex items-center justify-center w-[32px] h-[32px] rounded-md hover:bg-[var(--color-background-user-info-hover)]"
 					onClick={toggle}
 				>
-					<SettingIcon />
+					<SettingIcon className="[&_path]:stroke-[--color-arrow] [&_path]:fill-[--color-arrow]" />
 				</RippleButtonOrLink>
 			</div>
 		</div>

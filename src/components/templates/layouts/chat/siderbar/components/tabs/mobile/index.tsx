@@ -4,7 +4,7 @@ import { TabsProps } from "..";
 
 export function MobileTabs({ activeTab, setActiveTab, tabs }: TabsProps) {
 	return (
-		<div className="lt:hidden flex gap-x-1 w-full max-w-[95%] mx-auto overflow-x-scroll scrollbar">
+		<div className="lt:hidden flex gap-x-2 w-full max-w-[95%] mx-auto overflow-x-scroll scrollbar">
 			{tabs.map((tab) => (
 				<button
 					key={tab.id}
@@ -24,7 +24,7 @@ export function MobileTabs({ activeTab, setActiveTab, tabs }: TabsProps) {
 					)}
 					<span
 						className={cn(
-							"text-[var(--color)] z-20 relative",
+							"text-[var(--color)] z-20 relative align-middle",
 							activeTab === tab.id ? "" : "hover:opacity-[0.6]",
 						)}
 					>
